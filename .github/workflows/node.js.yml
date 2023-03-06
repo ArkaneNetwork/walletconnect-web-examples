@@ -5,6 +5,9 @@ name: WalletConnectWebExample CI
 
 on: [ push,workflow_dispatch ]
 
+env:
+  NEXT_PUBLIC_PROJECT_ID: ${{ vars.NEXT_PUBLIC_PROJECT_ID }}
+
 jobs:
   build:
     defaults:
@@ -21,7 +24,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-        cache-dependency-path: dapps/react-dapp-v2/yarn.lock
-    - run: yarn install
-    - run: yarn build
+        cache: 'npm'
+    - run: npm install
+    - run: npm run build
