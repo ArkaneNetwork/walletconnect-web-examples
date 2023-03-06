@@ -21,6 +21,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: dapps/react-dapp-v2/package-lock.json
-    - run: npm run build
+        cache: 'yarn'
+        cache-dependency-path: dapps/react-dapp-v2/yarn.lock
+    - run: yarn build
