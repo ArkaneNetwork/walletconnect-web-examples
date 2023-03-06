@@ -33,7 +33,7 @@ jobs:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           ${{ github.workspace }}/dapps/react-dapp-v2/.next/cache
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('dapps/react-dapp-v2/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
     - name: Use Node.js ${{ matrix.node-version }}
