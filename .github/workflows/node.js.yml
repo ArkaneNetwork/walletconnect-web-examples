@@ -9,8 +9,6 @@ on: [ push,workflow_dispatch ]
 
 jobs:
   build:
-    env:
-      NEXT_PUBLIC_PROJECT_ID: ${{ vars.NEXT_PUBLIC_PROJECT_ID }}
     defaults:
       run:
         working-directory: dapps/react-dapp-v2
@@ -40,5 +38,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: create env file
+      run: |
+        touch .env
+        echo NEXT_PUBLIC_PROJECT_ID=$NEXT_PUBLIC_PROJECT_ID >> .env
+        env:
+          NEXT_PUBLIC_PROJECT_ID: ${{ vars.NEXT_PUBLIC_PROJECT_ID }}
     - run: yarn install
     - run: yarn build
