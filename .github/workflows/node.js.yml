@@ -41,8 +41,6 @@ jobs:
     - name: create env file
       run: |
         touch .env
-        echo NEXT_PUBLIC_PROJECT_ID=$NEXT_PUBLIC_PROJECT_ID >> .env
-        env:
-          NEXT_PUBLIC_PROJECT_ID: ${{ vars.NEXT_PUBLIC_PROJECT_ID }}
+        echo NEXT_PUBLIC_PROJECT_ID=${{ vars.NEXT_PUBLIC_PROJECT_ID }} >> .env
     - run: yarn install
     - run: yarn build
