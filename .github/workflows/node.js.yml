@@ -11,9 +11,10 @@ on:
 
 jobs:
   build:
-
+    defaults:
+      run:
+        working-directory: dapps/react-dapp-v2
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -26,4 +27,3 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm run build 
-        working-directory: dapps/react-dapp-v2
