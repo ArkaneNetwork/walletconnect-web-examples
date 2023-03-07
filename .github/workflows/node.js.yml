@@ -1,0 +1,35 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: WalletConnectWebExample CI
+
+on: [ push,workflow_dispatch ]
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: dapps/react-dapp-v2
+    runs-on: ubuntu-latest
+    environment: 
+      name: development
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+        cache-dependency-path: |
+          dapps/react-dapp-v2/yarn.lock
+          ${{ github.workspace }}/dapps/react-dapp-v2/.next/cache
+    - name: create env file
+      run: |
+        touch .env
+        echo NEXT_PUBLIC_PROJECT_ID=${{ vars.NEXT_PUBLIC_PROJECT_ID }} >> .env
+    - run: yarn install
+    - run: yarn build
